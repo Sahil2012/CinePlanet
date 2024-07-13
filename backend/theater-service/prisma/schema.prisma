@@ -12,3 +12,51 @@ datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
+
+
+model Movies{
+  name String @id
+  description String?
+  starring String?
+  rating Int?
+  time Int
+  category String
+  show Show[]
+  ticket Ticket[]
+}
+
+model Seat {
+  seatId Int @id @default(autoincrement())
+  screenId Int
+  rowNo Int
+  colNo Int
+  type String
+  status String @default("avaialable")
+  screen Screen @relation(fields: [screenId],references: [screenId])
+}
+
+model Screen {
+  screenId Int @id
+  screenName String
+  seat Seat[]
+  show Show[]
+}
+
+model Show {
+  showId Int @id @default(autoincrement())
+  movieName String
+  screenId Int
+  startTime DateTime
+  movie Movies @relation(fields: [movieName], references: [name])
+  screen Screen @relation(fields: [screenId], references: [screenId])
+  ticket Ticket[]
+}
+
+model Ticket {
+  ticketId Int @id
+  movieName String
+  showId Int
+  movie Movies @relation(fields: [movieName], references: [name])
+  show Show @relation(fields: [showId],references: [showId])
+}
+
