@@ -4,6 +4,8 @@
 // Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
 // Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
 
+
+// config ---------------------------------------------------------------------
 generator client {
   provider = "prisma-client-js"
 }
@@ -14,49 +16,93 @@ datasource db {
 }
 
 
-model Movies{
-  name String @id
+// Model ----------------------------------------------------------------------
+model Movie {
+  id String @id @default(@autoincrement())
+  name String
   description String?
   starring String?
-  rating Int?
+  rating Rating
   time Int
-  category String
-  show Show[]
-  ticket Ticket[]
+  genres Genre[]
+  shows Show[]
+  tickets Ticket[]
 }
 
 model Seat {
-  seatId Int @id @default(autoincrement())
   screenId Int
+  screen Screen @relation(fields: [screenId], references: [id])
+  ticketId Int
+  ticket Ticket? @relation(fields: [ticketId], references: [id])
   rowNo Int
   colNo Int
-  type String
-  status String @default("avaialable")
-  screen Screen @relation(fields: [screenId],references: [screenId])
+  type SeatType
+  status SeatStatus @default(AVAILABLE)
+
+  @@id([screenId, rowNo, colNo])
 }
 
 model Screen {
-  screenId Int @id
-  screenName String
-  seat Seat[]
-  show Show[]
+  id Int @id @default(@autoincrement())
+  name String
+  seats Seat[]
+  shows Show[]
 }
 
 model Show {
-  showId Int @id @default(autoincrement())
-  movieName String
+  id Int @id @default(autoincrement())
+  movieId Int
+  movie Movie @relation(fields: [movieId], references: [id])
   screenId Int
+  screen Screen @relation(fields: [screenId], references: [id])
   startTime DateTime
-  movie Movies @relation(fields: [movieName], references: [name])
-  screen Screen @relation(fields: [screenId], references: [screenId])
   ticket Ticket[]
 }
 
 model Ticket {
-  ticketId Int @id
-  movieName String
+  id Int @id @default(autoincrement())
+  movieId Int
+  movie Movie @relation(fields: [movieId], references: [id])
   showId Int
-  movie Movies @relation(fields: [movieName], references: [name])
-  show Show @relation(fields: [showId],references: [showId])
+  show Show @relation(fields: [showId], references: [id])
+  seats Seat[]
+}
+
+
+// Enums -------------------------------------------------------------------
+enum Rating {
+  U
+  U/A
+  A
+  S
+}
+
+enum Genre {
+  HORROR
+  ROMANCE
+  ACTION
+  DRAMA
+  SCI-FI
+  THRILLER
+  COMEDY
+  DOCUMENTRY
+  ADUVENTURE
+  FANTASY
+  ANIMATION
+  WAR
+}
+
+enum SeatType {
+  CLUB
+  PRIME
+  PRIMEPLUS
+  ROYALE
+  ROYALERECLINER
+}
+
+enum SeatStatus {
+  AVAILABLE
+  BOOKED
+  LOCKED
 }
 
