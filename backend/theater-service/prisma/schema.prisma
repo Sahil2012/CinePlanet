@@ -28,33 +28,45 @@ model Movie {
 }
 
 model Seat {
+  id       Int            @id @default(autoincrement())
   screenId Int
-  screen   Screen     @relation(fields: [screenId], references: [id])
+  screen   Screen         @relation(fields: [screenId], references: [id])
   ticketId Int
-  ticket   Ticket?    @relation(fields: [ticketId], references: [id])
+  ticket   Ticket?        @relation(fields: [ticketId], references: [id])
   rowNo    Int
   colNo    Int
   type     SeatType
-  status   SeatStatus @default(AVAILABLE)
+  shows    SeatsOnShows[]
 
-  @@id([screenId, rowNo, colNo])
+  @@unique([screenId, rowNo, colNo])
+}
+
+model SeatsOnShows {
+  showId Int
+  show   Show       @relation(fields: [showId], references: [id])
+  seatId Int
+  seat   Seat       @relation(fields: [seatId], references: [id])
+  status SeatStatus
+
+  @@id([showId, seatId])
 }
 
 model Screen {
   id    Int    @id @default(autoincrement())
-  name  String
+  name  String @unique
   seats Seat[]
   shows Show[]
 }
 
 model Show {
-  id        Int      @id @default(autoincrement())
-  movieId   Int
-  movie     Movie    @relation(fields: [movieId], references: [id])
-  screenId  Int
-  screen    Screen   @relation(fields: [screenId], references: [id])
-  startTime DateTime
-  ticket    Ticket[]
+  id           Int            @id @default(autoincrement())
+  movieId      Int
+  movie        Movie          @relation(fields: [movieId], references: [id])
+  screenId     Int
+  screen       Screen         @relation(fields: [screenId], references: [id])
+  startTime    DateTime
+  tickets      Ticket[]
+  SeatsOnShows SeatsOnShows[]
 }
 
 model Ticket {
