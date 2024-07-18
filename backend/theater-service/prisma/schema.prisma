@@ -31,8 +31,6 @@ model Seat {
   id       Int            @id @default(autoincrement())
   screenId Int
   screen   Screen         @relation(fields: [screenId], references: [id])
-  ticketId Int
-  ticket   Ticket?        @relation(fields: [ticketId], references: [id])
   rowNo    Int
   colNo    Int
   type     SeatType
@@ -42,11 +40,13 @@ model Seat {
 }
 
 model SeatsOnShows {
-  showId Int
-  show   Show       @relation(fields: [showId], references: [id])
-  seatId Int
-  seat   Seat       @relation(fields: [seatId], references: [id])
-  status SeatStatus
+  showId   Int
+  show     Show       @relation(fields: [showId], references: [id])
+  seatId   Int
+  seat     Seat       @relation(fields: [seatId], references: [id])
+  ticketId Int?
+  ticket   Ticket?    @relation(fields: [ticketId], references: [id])
+  status   SeatStatus
 
   @@id([showId, seatId])
 }
@@ -70,12 +70,12 @@ model Show {
 }
 
 model Ticket {
-  id      Int    @id @default(autoincrement())
-  movieId Int
-  movie   Movie  @relation(fields: [movieId], references: [id])
-  showId  Int
-  show    Show   @relation(fields: [showId], references: [id])
-  seats   Seat[]
+  id           Int            @id @default(autoincrement())
+  movieId      Int
+  movie        Movie          @relation(fields: [movieId], references: [id])
+  showId       Int
+  show         Show           @relation(fields: [showId], references: [id])
+  SeatsOnShows SeatsOnShows[]
 }
 
 // Enums -------------------------------------------------------------------
