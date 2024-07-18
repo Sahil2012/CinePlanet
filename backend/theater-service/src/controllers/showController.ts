@@ -36,7 +36,6 @@ export const updateSeatsStatus = async (req: Request, res: Response) => {
   // Extract request objects
   const seats: SeatsOnShows[] = req.body;
 
-  console.log(showId, seats, req.body);
   // Validations
   if (!Array.isArray(seats) || seats.length == 0) {
     return res.status(400).json({ message: "Invalid seats data" });
