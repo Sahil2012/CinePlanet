@@ -1,8 +1,8 @@
-import { Router } from 'express';
-import showController from '../controllers/showController';
+import { Router } from "express";
+import { getAllShows } from "../controllers/showController";
 
 const router = Router();
 
-router.get('/:movieName', showController.getAllShows);
+router.get("/", getAllShows);
 
 export default router;
