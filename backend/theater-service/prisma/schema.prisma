@@ -17,7 +17,7 @@ datasource db {
 // Model ----------------------------------------------------------------------
 model Movie {
   id          Int      @id @default(autoincrement())
-  name        String
+  name        String   @unique
   description String?
   starring    String?
   rating      Rating
