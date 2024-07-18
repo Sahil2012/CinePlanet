@@ -3,11 +3,11 @@ import showService from "../services/showService";
 
 export const getAllShows = async (req: Request, res: Response) => {
   // extract query parameters
-  const movieName = req.query.movieId as string;
+  const movieName = req.query.movieName as string;
 
   // guard condition
   if (!movieName) {
-    return res.status(400).json({ message: "Query parameter expected" });
+    return res.status(400).json({ message: "Please provide movie Name" });
   }
 
   // Execute query
