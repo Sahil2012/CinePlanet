@@ -26,7 +26,7 @@ const updateSeatsStatus = async (
   status: SeatStatus
 ) => {
   try {
-    return await prisma.seatsOnShows.updateMany({
+    await prisma.seatsOnShows.updateMany({
       where: {
         showId: showId,
         seatId: {
@@ -35,6 +35,19 @@ const updateSeatsStatus = async (
       },
       data: {
         status: status,
+      },
+    });
+
+    return await prisma.seatsOnShows.findMany({
+      where: {
+        showId: showId,
+        seatId: {
+          in: seats.map((seat) => seat.seatId),
+        },
+      },
+      select: {
+        seatId: true,
+        status: true,
       },
     });
   } catch (err) {
