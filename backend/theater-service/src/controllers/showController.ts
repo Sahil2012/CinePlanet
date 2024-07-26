@@ -57,7 +57,7 @@ export const updateSeatsStatus = async (req: Request, res: Response) => {
   // execute query
   try {
     const status = seats[0].status;
-    const updatedSeats = showService.updateSeatsStatus(
+    const updatedSeats = await showService.updateSeatsStatus(
       numericShowId,
       seats,
       status
