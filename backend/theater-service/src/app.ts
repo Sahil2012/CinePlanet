@@ -1,10 +1,7 @@
-import express, { Application } from 'express';
-import bodyParser from 'body-parser';
-import dotenv from 'dotenv';
-import routes from './routes';
-import errorHandler from './middleware/errorHandler';
-
-dotenv.config();
+import express, { Application } from "express";
+import bodyParser from "body-parser";
+import routes from "./routes";
+import errorHandler from "./middleware/errorHandler";
 
 const app: Application = express();
 
@@ -13,7 +10,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 // Routes
-app.use('/api', routes);
+app.use("/api", routes);
 
 // Error handling middleware
 app.use(errorHandler);

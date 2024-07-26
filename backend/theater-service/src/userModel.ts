@@ -1,4 +1,4 @@
-import bcrypt from 'bcrypt';
+import bcrypt from "bcrypt";
 
 interface User {
   id: number;
@@ -15,7 +15,10 @@ export const findUserByUsername = (username: string): User | undefined => {
 };
 
 // function to add a new user
-export const addUser = async (username: string, password: string): Promise<User> => {
+export const addUser = async (
+  username: string,
+  password: string
+): Promise<User> => {
   const saltRounds = 10;
   const hashedPassword = await bcrypt.hash(password, saltRounds);
   const newUser = { id: users.length + 1, username, password: hashedPassword };
