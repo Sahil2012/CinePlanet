@@ -4,19 +4,23 @@ import { z } from "zod";
 export const movieValidator = (movie: Movie) =>
   z
     .object({
-      name: z.string({ message: "Movie name is required" }),
+      name: z.string({ message: "'name' is required" }),
       rating: z.nativeEnum(Rating, {
-        required_error: "Movie rating is required",
+        required_error: "'rating' is required",
       }),
       time: z.number({
-        required_error: "Movie time is required",
-        invalid_type_error: "Invalid movie time",
+        required_error: "'time' is required",
+        invalid_type_error: "Invalid value for 'time'",
       }),
       genres: z
-        .nativeEnum(Genre, { message: "Invalid Genre" })
+        .nativeEnum(Genre, { message: "Invalid value for 'genres'" })
         .array()
-        .nonempty({ message: "Genres list cannot be empty" }),
-      desciption: z.string({ message: "Invalid description" }).optional(),
-      starring: z.string({ message: "Invalid starring attribute" }).optional(),
+        .nonempty({ message: "'genres' cannot be empty" }),
+      desciption: z
+        .string({ message: "Invalid value for 'description'" })
+        .optional(),
+      starring: z
+        .string({ message: "Invalid value for 'starring'" })
+        .optional(),
     })
     .safeParse(movie);
