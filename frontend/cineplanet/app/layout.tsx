@@ -1,9 +1,11 @@
 import type { Metadata } from "next";
 import { Poppins } from "next/font/google";
-import "./globals.css";
-import { Theme, ThemePanel } from "@radix-ui/themes";
-import "@radix-ui/themes/styles.css";
+import { Container, Theme, ThemePanel } from "@radix-ui/themes";
 import { ThemeProvider } from "next-themes";
+
+// CSS
+import "./theme.css"  // Radix theme import and config
+import "./globals.css";
 
 export const metadata: Metadata = {
   title: "CinePlanet",
@@ -26,8 +28,10 @@ export default function RootLayout({
       <body className={`${poppins.variable} antialiased`}>
         <ThemeProvider attribute="class">
           <Theme accentColor="mint" grayColor="slate">
-            {children}
-            <ThemePanel />
+            <Container className="px-5">
+              <main>{children}</main>
+            </Container>
+            {/* <ThemePanel /> */}
           </Theme>
         </ThemeProvider>
       </body>
