@@ -1,10 +1,11 @@
 import type { Metadata } from "next";
 import { Poppins } from "next/font/google";
-import { Container, Theme, ThemePanel } from "@radix-ui/themes";
 import { ThemeProvider } from "next-themes";
+import { Container, Theme, ThemePanel } from "@radix-ui/themes";
+import NavBar from "@/app/_components/function/navbar";
 
 // CSS
-import "./theme.css"  // Radix theme import and config
+import "./theme.css"; // Radix theme import and config
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -29,6 +30,7 @@ export default function RootLayout({
         <ThemeProvider attribute="class">
           <Theme accentColor="mint" grayColor="slate">
             <Container className="px-5">
+              <NavBar />
               <main>{children}</main>
             </Container>
             {/* <ThemePanel /> */}
