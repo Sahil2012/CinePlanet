@@ -1,8 +1,7 @@
-import { Box, Flex, Text } from "@radix-ui/themes";
 import Logo from "@/app/_assets/cine-planet-logo.png";
 import LogoText from "@/app/_assets/cine-planet.png";
+import { Flex } from "@radix-ui/themes";
 import Image from "next/image";
-import React from "react";
 import Profile from "./Profile";
 
 const NavBar = () => {

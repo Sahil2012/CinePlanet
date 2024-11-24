@@ -1,12 +1,12 @@
-import type { Metadata } from "next";
-import { Poppins } from "next/font/google";
-import { ThemeProvider } from "next-themes";
-import { Container, Theme, ThemePanel } from "@radix-ui/themes";
 import NavBar from "@/app/_components/function/navbar";
+import { Container, Theme } from "@radix-ui/themes";
+import type { Metadata } from "next";
+import { ThemeProvider } from "next-themes";
+import { Poppins } from "next/font/google";
 
 // CSS
-import "./theme.css"; // Radix theme import and config
 import "./globals.css";
+import "./theme.css"; // Radix theme import and config
 
 export const metadata: Metadata = {
   title: "CinePlanet",
