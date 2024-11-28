@@ -7,14 +7,20 @@ interface MovieCardProps {
     name: string;
     description: string;
     img?: string;
+    onclick?: () => void;
 }
 
-const MovieCard = ({ name, description, img }: MovieCardProps) => {
+const MovieCard = ({ name, description, img, onclick }: MovieCardProps) => {
     return (
-        <Box className="mx-2 h-full">
-            <Card size="2" className="w-full h-full">
+        <Box className="px-2 h-full">
+            <Card size="2" className={onclick? "transform duration-200 w-full cursor-pointer hover:ring ring-neutral-200": "w-full h-full"}  onClick={() => {
+                    if (onclick) {
+                        onclick()
+                    }
+                }
+            }>
                 <Inset clip="padding-box" side="top" pb="current">
-                    { img? <Image
+                    {img ? <Image
                         src={img}
                         alt={name}
                         style={{
@@ -24,8 +30,8 @@ const MovieCard = ({ name, description, img }: MovieCardProps) => {
                             height: "12rem",
                             backgroundColor: "var(--gray-5)",
                         }}
-                    />:
-                    <div className="h-48" style={{backgroundColor: "var(--gray-5)"}}></div>}
+                    /> :
+                        <div className="h-48" style={{ backgroundColor: "var(--gray-5)" }}></div>}
                 </Inset>
                 <div className="flex flex-col gap-2 p-4">
                     <div className="font-semibold">
