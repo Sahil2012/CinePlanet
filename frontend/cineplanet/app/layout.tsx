@@ -1,5 +1,5 @@
 import NavBar from "@/app/_components/function/navbar";
-import { Container, Theme } from "@radix-ui/themes";
+import { Box, Container, Theme } from "@radix-ui/themes";
 import type { Metadata } from "next";
 import { ThemeProvider } from "next-themes";
 import { Poppins } from "next/font/google";
@@ -7,6 +7,7 @@ import { Poppins } from "next/font/google";
 // CSS
 import "./globals.css";
 import "./theme.css"; // Radix theme import and config
+import AuthProvider from "./_lib/auth/AuthProvider";
 
 export const metadata: Metadata = {
   title: "CinePlanet",
@@ -27,15 +28,19 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body className={`${poppins.variable} antialiased`}>
-        <ThemeProvider attribute="class">
-          <Theme accentColor="mint" grayColor="slate">
-            <Container className="px-5">
-              <NavBar />
-              <main>{children}</main>
-            </Container>
-            {/* <ThemePanel /> */}
-          </Theme>
-        </ThemeProvider>
+        <AuthProvider>
+          <ThemeProvider attribute="class">
+            <Theme accentColor="mint" grayColor="slate">
+              <Container className="px-5">
+                <Box className="h-screen flex flex-col">
+                  <NavBar />
+                  <main className="h-1 flex-grow">{children}</main>
+                </Box>
+              </Container>
+              {/* <ThemePanel /> */}
+            </Theme>
+          </ThemeProvider>
+        </AuthProvider>
       </body>
     </html>
   );
