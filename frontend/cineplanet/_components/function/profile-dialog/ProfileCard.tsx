@@ -1,4 +1,4 @@
-import { getInitials } from "@/app/_lib/utils";
+import { getInitials } from "@/_lib/utils";
 import { Avatar, Box, Card, Flex, Text } from "@radix-ui/themes";
 import { useSession } from "next-auth/react";
 import React from "react";

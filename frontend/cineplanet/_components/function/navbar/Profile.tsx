@@ -1,8 +1,8 @@
 "use client";
-import { Avatar, Box, Button, DropdownMenu, Link } from "@radix-ui/themes";
+import { getInitials } from "@/_lib/utils";
+import { Avatar, Box, Button, Link } from "@radix-ui/themes";
+import { useSession } from "next-auth/react";
 import LoginDialog from "../login-dialog";
-import { signOut, useSession } from "next-auth/react";
-import { getInitials } from "@/app/_lib/utils";
 import ProfileDialog from "../profile-dialog";
 
 const Profile = () => {

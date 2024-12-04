@@ -1,13 +1,13 @@
-import NavBar from "@/app/_components/function/navbar";
+import NavBar from "@/_components/function/navbar";
 import { Box, Container, Theme } from "@radix-ui/themes";
 import type { Metadata } from "next";
 import { ThemeProvider } from "next-themes";
 import { Poppins } from "next/font/google";
 
 // CSS
-import "./globals.css";
-import "./theme.css"; // Radix theme import and config
-import AuthProvider from "./_lib/auth/AuthProvider";
+import "@/_styles/globals.css";
+import "@/_styles/theme.css"; // Radix theme import and config
+import AuthProvider from "../_lib/auth/AuthProvider";
 
 export const metadata: Metadata = {
   title: "CinePlanet",

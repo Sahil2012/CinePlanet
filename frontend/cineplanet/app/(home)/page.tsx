@@ -1,7 +1,7 @@
 "use client";
 
 import { Badge, Button, Dialog, Inset, Strong, Text } from "@radix-ui/themes";
-import MovieCard from "../_components/movie_card/MovieCard";
+import MovieCard from "../../_components/movie_card/MovieCard";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 import { useState } from "react";
