@@ -3,11 +3,12 @@ import { Box, Container, Theme } from "@radix-ui/themes";
 import type { Metadata } from "next";
 import { ThemeProvider } from "next-themes";
 import { Poppins } from "next/font/google";
+import AuthProvider from "../_lib/auth/AuthProvider";
+import ScrollArea from "@/_components/ui/scroll-area";
 
 // CSS
-import "@/_styles/globals.css";
 import "@/_styles/theme.css"; // Radix theme import and config
-import AuthProvider from "../_lib/auth/AuthProvider";
+import "@/_styles/globals.css";
 
 export const metadata: Metadata = {
   title: "CinePlanet",
@@ -31,12 +32,20 @@ export default function RootLayout({
         <AuthProvider>
           <ThemeProvider attribute="class">
             <Theme accentColor="mint" grayColor="slate">
-              <Container className="px-5">
-                <Box className="h-screen flex flex-col">
-                  <NavBar />
-                  <main className="h-1 flex-grow">{children}</main>
+              <ScrollArea className="h-screen">
+                <Box className="bg-[var(--color-background)] z-10 fixed w-[calc(100%-0.4rem)] top-0 left-0 pl-[0.4rem]">
+                  <Container className="px-5">
+                    <Box className="h-20">
+                      <NavBar />
+                    </Box>
+                  </Container>
                 </Box>
-              </Container>
+                <Box className="relative top-20">
+                  <Container className="px-5">
+                    <main>{children}</main>
+                  </Container>
+                </Box>
+              </ScrollArea>
               {/* <ThemePanel /> */}
             </Theme>
           </ThemeProvider>

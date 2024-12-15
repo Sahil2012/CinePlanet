@@ -1,0 +1,39 @@
+.scrollArea {
+  overflow: auto;
+  visibility: hidden;
+  transition-property: visibility;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 150ms;
+}
+
+.scrollContentArea {
+  height: 100%;
+}
+
+.scrollContentArea,
+.scrollArea:hover,
+.scrollArea:focus {
+  visibility: visible;
+  transition-property: visibility;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 150ms;
+}
+
+.scrollArea::-webkit-scrollbar {
+  width: 0.4rem;
+}
+
+.scrollArea::-webkit-scrollbar-track {
+  cursor: pointer;
+  border-radius: 0.4rem;
+  background-color: var(--gray-a4);
+  border: 0.2rem solid transparent;
+}
+
+.scrollArea::-webkit-scrollbar-thumb {
+  border: 0.2rem solid transparent;
+  padding: 0.1rem;
+  cursor: pointer;
+  border-radius: 0.4rem;
+  background-color: var(--accent-8);
+}
