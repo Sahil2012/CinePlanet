@@ -36,7 +36,7 @@ const HomePage = async ({ searchParams }: HomePageProps) => {
   const theatres = await TheatreService.getTheatres();
 
   return (
-    <Flex py="5" direction="column" gap="6" className="h-full">
+    <Flex py="3" direction="column" gap="5" className="h-full">
       <FilterControl genres={genres} theatres={theatres} />
       <Box>
         <MoviesContent
