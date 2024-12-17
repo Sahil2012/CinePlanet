@@ -7,7 +7,6 @@ const data: Movie[] = [
     description:
       "Lorem ipsum odor amet, consectetuer adipiscing elit. Est molestie pretium inceptos in tristique sodales. Dignissim conubia aliquam iaculis mi phasellus; in senectus. Dignissim dolor molestie integer aptent sagittis.",
     genres: ["Romance", "Comedy"],
-    showtimes: ["12:00", "3:30", "7:15"],
     languages: ["Hindi"],
     rating: "U/A 13+",
   },
@@ -17,7 +16,6 @@ const data: Movie[] = [
     description:
       "Lorem ipsum odor amet, consectetuer adipiscing elit. Etiam efficitur torquent rhoncus fermentum himenaeos neque conubia purus quam. Ridiculus pretium ultricies tincidunt ac integer est? Per rutrum cursus risus ultrices varius, leo non id posuere.",
     genres: ["Action"],
-    showtimes: ["12:00", "3:30", "7:15"],
     languages: ["Hindi", "English"],
     rating: "U",
     img: "https://image.tmdb.org/t/p/w370_and_h556_bestv2/aMpyrCizvSdc0UIMblJ1srVgAEF.jpg",
@@ -28,7 +26,6 @@ const data: Movie[] = [
     description:
       "Lorem ipsum odor amet, consectetuer adipiscing elit. Id arcu ex erat nunc varius nisi. Cursus molestie tincidunt magnis primis maximus facilisis efficitur ultricies. Orci sodales vivamus proin potenti, morbi in condimentum phasellus.",
     genres: ["Horror", "Documentary"],
-    showtimes: ["12:00", "3:30", "7:15"],
     languages: ["Hindi", "English"],
     rating: "U/A 16+",
   },
@@ -38,7 +35,6 @@ const data: Movie[] = [
     description:
       "Lorem ipsum odor amet, consectetuer adipiscing elit. Donec justo integer tellus in taciti consequat. Fringilla vestibulum purus aenean sagittis congue quam congue.",
     genres: ["Action", "Science Fiction"],
-    showtimes: ["12:00", "3:30", "7:15"],
     languages: ["Hindi"],
     rating: "A",
     img: "https://image.tmdb.org/t/p/w370_and_h556_bestv2/aMpyrCizvSdc0UIMblJ1srVgAEF.jpg",
@@ -49,7 +45,6 @@ const data: Movie[] = [
     description:
       "Lorem ipsum odor amet, consectetuer adipiscing elit. Cras facilisi eleifend faucibus eu quis himenaeos ornare. Eu class ligula nibh sollicitudin rutrum quisque sem massa. Bibendum facilisi ultricies tincidunt class tellus praesent congue platea porttitor.",
     genres: ["Drama", "Romance"],
-    showtimes: ["12:00", "3:30", "7:15"],
     languages: ["Hindi"],
     rating: "U/A 13+",
   },
@@ -63,7 +58,6 @@ export interface Movie {
   genres: Genre[];
   img?: string;
   languages?: string[];
-  showtimes: string[];
 }
 
 interface GetMoviesOptions {
@@ -71,7 +65,7 @@ interface GetMoviesOptions {
   theatres?: string[];
 }
 
-class MovieService {  
+class MovieService {
   getMovies(options?: GetMoviesOptions): Promise<Movie[]> {
     const movies = new Promise<Movie[]>((res) => {
       setTimeout(() => {
