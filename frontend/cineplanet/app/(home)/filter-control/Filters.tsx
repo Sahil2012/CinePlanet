@@ -45,18 +45,26 @@ const Filters = ({
         ),
       ]);
     }
-  }, []);
+  }, [searchParams]);
 
   // change params on state change
   useEffect(() => {
-    const params = new URLSearchParams();
+    const params = new URLSearchParams(searchParams);
 
+    // delete previous values
+    while (params.has("genres")) {
+      params.delete("genres");
+    }
+    while (params.has("theatres")) {
+      params.delete("theatres");
+    }
+
+    // add new values
     if (selectedGenres.length > 0) {
       selectedGenres.forEach((genre) => params.append("genres", genre));
     } else {
       params.delete("genres");
     }
-
     if (selectedTheatres.length > 0) {
       selectedTheatres.forEach((theatre) => params.append("theatres", theatre));
     } else {

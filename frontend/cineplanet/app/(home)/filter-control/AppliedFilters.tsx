@@ -1,6 +1,9 @@
 import BadgeGroup from "@/_components/ui/BadgeGroup";
-import { Button, Flex, Text } from "@radix-ui/themes";
+import { Button, Flex, Strong, Text } from "@radix-ui/themes";
+import { useRouter, useSearchParams } from "next/navigation";
 import React from "react";
+import { IoCloseCircle } from "react-icons/io5";
+import { MdClose } from "react-icons/md";
 
 interface AppliedFiltersProps {
   selectedGenres: string[];
@@ -15,36 +18,55 @@ const AppliedFilters = ({
   setSelectedGenres,
   setSelectedTheatres,
 }: AppliedFiltersProps) => {
-  if (selectedGenres.length === 0 && selectedTheatres.length === 0) {
+  const searchParams = useSearchParams();
+  const searchQuery = searchParams.get("search");
+
+  const areFiltersApplied =
+    selectedGenres.length > 0 || selectedTheatres.length > 0;
+
+  if (!searchQuery && !areFiltersApplied) {
     return null;
   }
 
   return (
-    <Flex justify="between" align="center">
-      <Flex gap="3" align="center">
-        <Text className="mx-1">Filters</Text>
-        <BadgeGroup
-          values={selectedGenres}
-          onCancel={(genre) => {
-            setSelectedGenres(selectedGenres.filter((g) => g !== genre));
-          }}
-        />
-        <BadgeGroup
-          values={selectedTheatres}
-          onCancel={(theatre) => {
-            setSelectedTheatres(selectedTheatres.filter((t) => t !== theatre));
-          }}
-        />
-      </Flex>
-      <Button
-        variant="soft"
-        onClick={() => {
-          setSelectedGenres([]);
-          setSelectedTheatres([]);
-        }}
-      >
-        Clear filters
-      </Button>
+    <Flex direction="column" gap="3">
+      {areFiltersApplied && (
+        <Flex justify="between" align="center">
+          <Flex gap="3" align="center">
+            <Text className="mx-1">Filters</Text>
+            <BadgeGroup
+              values={selectedGenres}
+              onCancel={(genre) => {
+                setSelectedGenres(selectedGenres.filter((g) => g !== genre));
+              }}
+            />
+            <BadgeGroup
+              values={selectedTheatres}
+              onCancel={(theatre) => {
+                setSelectedTheatres(
+                  selectedTheatres.filter((t) => t !== theatre)
+                );
+              }}
+            />
+          </Flex>
+          <Button
+            variant="soft"
+            onClick={() => {
+              setSelectedGenres([]);
+              setSelectedTheatres([]);
+            }}
+          >
+            Clear filters
+          </Button>
+        </Flex>
+      )}
+      {searchQuery && (
+        <Text className="mx-1 mt-2" size="4" color="gray">
+          <em>
+            Showing results for <Strong>"{searchQuery}"</Strong>
+          </em>
+        </Text>
+      )}
     </Flex>
   );
 };
