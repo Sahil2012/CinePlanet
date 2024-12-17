@@ -13,7 +13,7 @@ const NowShowingMovies = ({ movies }: { movies: Movie[] }) => {
   return (
     <Box>
       <Heading className="!text-4xl font-bold mb-4">Now showing</Heading>
-      <Carousel>
+      <Carousel itemClassname="!w-60">
         {movies.map((movie) => {
           return <MovieCard key={movie.name} movie={movie} />;
         })}
