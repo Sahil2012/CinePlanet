@@ -28,7 +28,7 @@ const MovieDetails = ({ movie }: MovieDetailsProps) => {
     <Box className="relative py-10">
       <Box className="absolute bg-[var(--gray-5)] h-full -translate-x-1/2 w-[calc(100vw-0.4rem)] left-1/2 -z-10 -top-0"></Box>
       <Flex align="center" gap="7" className="w-full">
-        <Card className="w-64 min-w-64 h-96 border-2 border-[var(--accent-8)]">
+        <Card className="w-56 min-w-56 h-80 border-2 border-[var(--accent-8)]">
           <Inset clip="padding-box" side="all" p="current">
             {image}
           </Inset>
