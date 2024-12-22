@@ -2,7 +2,7 @@
 
 import { SeatStatus } from "@/_services/SeatService";
 import { Box, Callout, Grid, Text } from "@radix-ui/themes";
-import { useState } from "react";
+import { Fragment, useState } from "react";
 import Seat from "./Seat";
 import { BiError } from "react-icons/bi";
 import { MdError } from "react-icons/md";
@@ -63,8 +63,8 @@ const SeatArrangement = ({ seatArrangement }: SeatArrangementProps) => {
 
           // render row
           return (
-            <>
-              <Text key={rowName} color="gray" size="4" className="mr-8">
+            <Fragment key={"#" + rowIndex}>
+              <Text color="gray" size="4" className="mr-8">
                 {rowName}
               </Text>
               {row.map((seat, columnIndex) => {
@@ -85,7 +85,7 @@ const SeatArrangement = ({ seatArrangement }: SeatArrangementProps) => {
                   />
                 );
               })}
-            </>
+            </Fragment>
           );
         })}
       </Grid>
