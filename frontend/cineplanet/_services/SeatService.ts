@@ -124,7 +124,7 @@ const data: SeatStatus[][] = [
 export type SeatStatus = "AVAILABLE" | "BLOCKED" | "NA";
 
 class SeatService {
-  getSeatArrangement(theatreId: string, showId: string) {
+  getSeatArrangement(showId: string, theatreId: string) {
     return new Promise<SeatStatus[][]>((res) => {
       setTimeout(() => {
         res(data);

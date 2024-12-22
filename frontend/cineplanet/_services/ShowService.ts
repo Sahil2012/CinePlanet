@@ -5,7 +5,7 @@ const data: Show[] = [
     movieId: "1",
     timestamp: 1713702000000,
     theatreName: "Grand Cinema Hall",
-    language: "English"
+    language: "English",
   }, // 10:00 AM
   {
     id: "2",
@@ -13,7 +13,7 @@ const data: Show[] = [
     movieId: "1",
     timestamp: 1713712800000,
     theatreName: "Grand Cinema Hall",
-    language: "Hindi"
+    language: "Hindi",
   }, // 01:00 PM
   {
     id: "3",
@@ -21,7 +21,7 @@ const data: Show[] = [
     movieId: "1",
     timestamp: 1713723600000,
     theatreName: "Grand Cinema Hall",
-    language: "Hindi"
+    language: "Hindi",
   }, // 04:00 PM
   {
     id: "11",
@@ -29,7 +29,7 @@ const data: Show[] = [
     movieId: "1",
     timestamp: 1713702000000,
     theatreName: "Grand Cinema Hall",
-    language: "English"
+    language: "English",
   }, // 10:00 AM
   {
     id: "12",
@@ -37,7 +37,7 @@ const data: Show[] = [
     movieId: "1",
     timestamp: 1713712800000,
     theatreName: "Grand Cinema Hall",
-    language: "English"
+    language: "English",
   }, // 01:00 PM
   {
     id: "13",
@@ -45,7 +45,7 @@ const data: Show[] = [
     movieId: "1",
     timestamp: 1713723600000,
     theatreName: "Grand Cinema Hall",
-    language: "English"
+    language: "English",
   }, // 04:00 PM
   {
     id: "14",
@@ -53,7 +53,7 @@ const data: Show[] = [
     movieId: "1",
     timestamp: 1713702000000,
     theatreName: "Grand Cinema Hall",
-    language: "English"
+    language: "English",
   }, // 10:00 AM
   {
     id: "15",
@@ -61,7 +61,7 @@ const data: Show[] = [
     movieId: "1",
     timestamp: 1713712800000,
     theatreName: "Grand Cinema Hall",
-    language: "English"
+    language: "English",
   }, // 01:00 PM
   {
     id: "16",
@@ -69,7 +69,7 @@ const data: Show[] = [
     movieId: "1",
     timestamp: 1713723600000,
     theatreName: "Grand Cinema Hall",
-    language: "English"
+    language: "English",
   }, // 04:00 PM
   {
     id: "4",
@@ -77,7 +77,7 @@ const data: Show[] = [
     movieId: "1",
     timestamp: 1713705600000,
     theatreName: "Cineplex Deluxe",
-    language: "English"
+    language: "English",
   }, // 11:00 AM
   {
     id: "5",
@@ -85,7 +85,7 @@ const data: Show[] = [
     movieId: "1",
     timestamp: 1713716400000,
     theatreName: "Cineplex Deluxe",
-    language: "English"
+    language: "English",
   }, // 02:00 PM
   {
     id: "6",
@@ -93,7 +93,7 @@ const data: Show[] = [
     movieId: "1",
     timestamp: 1713727200000,
     theatreName: "Cineplex Deluxe",
-    language: "English"
+    language: "English",
   }, // 05:00 PM
   {
     id: "7",
@@ -101,7 +101,7 @@ const data: Show[] = [
     movieId: "1",
     timestamp: 1713709200000,
     theatreName: "Star Movie Theatre",
-    language: "English"
+    language: "English",
   }, // 12:00 PM
   {
     id: "8",
@@ -109,7 +109,7 @@ const data: Show[] = [
     movieId: "1",
     timestamp: 1713720000000,
     theatreName: "Star Movie Theatre",
-    language: "English"
+    language: "English",
   }, // 03:00 PM
   {
     id: "9",
@@ -117,7 +117,7 @@ const data: Show[] = [
     movieId: "1",
     timestamp: 1713711000000,
     theatreName: "Star Movie Theatre",
-    language: "English"
+    language: "English",
   }, // 12:30 PM
   {
     id: "10",
@@ -125,7 +125,7 @@ const data: Show[] = [
     movieId: "1",
     timestamp: 1713721800000,
     theatreName: "Grand Cinema Hall",
-    language: "English"
+    language: "English",
   }, // 03:30 PM
 ];
 
@@ -146,6 +146,19 @@ class ShowService {
       }, 10);
     });
     return shows;
+  }
+
+  getShow(showId: string, theatreId: string): Promise<Show | undefined> {
+    const show = new Promise<Show | undefined>((res) => {
+      setTimeout(() => {
+        res(
+          data.find(
+            (show) => show.id === showId && show.theatreId === theatreId
+          )
+        );
+      }, 10);
+    });
+    return show;
   }
 }
 

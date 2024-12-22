@@ -1,7 +1,8 @@
 import SeatService from "@/_services/SeatService";
-import { Flex } from "@radix-ui/themes";
+import ShowService from "@/_services/ShowService";
 import { notFound } from "next/navigation";
-import SeatArrangement from "./seat-arrangement";
+import Show from "./show";
+import MovieService from "@/_services/MovieService";
 
 interface ShowPageProps {
   params: Promise<{
@@ -15,16 +16,27 @@ const ShowPage = async ({ params }: ShowPageProps) => {
     return notFound();
   }
 
-  const seatArrangement = await SeatService.getSeatArrangement(theatreId, showId);
-  if (!seatArrangement) {
+  const seatArrangementPromise = SeatService.getSeatArrangement(
+    showId,
+    theatreId
+  );
+  const showPromise = ShowService.getShow(showId, theatreId);
+
+  const [seatArrangement, show] = await Promise.all([
+    seatArrangementPromise,
+    showPromise,
+  ]);
+
+  if (!seatArrangement || !show) {
     return notFound();
   }
 
-  return (
-    <Flex justify="center" align="center" className="relative h-[var(--main-area-height)]">
-      <SeatArrangement seatArrangement={seatArrangement} />
-    </Flex>
-  );
+  const movie = await MovieService.getMovie(show.movieId);
+  if (!movie) {
+    return notFound();
+  }
+  
+  return <Show show={show} movie={movie} seatArrangement={seatArrangement} />;
 };
 
 export default ShowPage;

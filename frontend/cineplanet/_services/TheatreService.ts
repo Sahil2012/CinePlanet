@@ -1,17 +1,17 @@
 const data = [
   {
-    id: '1',
-    name: 'Theatre 1'
+    id: "1",
+    name: "Theatre 1",
   },
   {
-    id: '2',
-    name: 'Theatre 2'
+    id: "2",
+    name: "Theatre 2",
   },
   {
-    id: '3',
-    name: 'Theatre 3'
-  }
-]
+    id: "3",
+    name: "Theatre 3",
+  },
+];
 
 export interface Theatre {
   id: string;
@@ -26,6 +26,15 @@ class TheatreService {
       }, 10);
     });
     return theatres;
+  }
+
+  getTheatre(theatreId: string): Promise<Theatre | undefined> {
+    const theatre = new Promise<Theatre | undefined>((res) => {
+      setTimeout(() => {
+        res(data.find((theatre) => theatre.id === theatreId));
+      }, 10);
+    });
+    return theatre;
   }
 }
 
