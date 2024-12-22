@@ -18,7 +18,7 @@ const ShowList = async ({ movieId, date: selectedDate }: ShowListProps) => {
       <Table.Body>
         {Object.keys(showsGroupedByTheatres).map((theatreName) => (
           <Table.Row key={theatreName}>
-            <Table.RowHeaderCell width="40%">
+            <Table.RowHeaderCell width="35%">
               <TheatreDetails theatreName={theatreName} />
             </Table.RowHeaderCell>
             <Table.Cell width="60%">
