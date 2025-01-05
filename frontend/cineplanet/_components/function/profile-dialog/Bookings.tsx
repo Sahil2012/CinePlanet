@@ -1,13 +1,11 @@
 import {
   Box,
-  Em,
   Flex,
   Heading,
   Separator,
   Table,
-  Text,
+  Text
 } from "@radix-ui/themes";
-import React from "react";
 
 const bookings = [
   {
@@ -30,7 +28,7 @@ const Bookings = () => {
   return (
     <Box>
       <Heading align="center" size="4" mb="3">
-        Bookings
+        Your bookings
       </Heading>
       <Table.Root variant="surface">
         <Table.Body>
