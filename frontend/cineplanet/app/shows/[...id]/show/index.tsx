@@ -5,10 +5,8 @@ import { Box, Flex } from "@radix-ui/themes";
 import ShowDetails from "./ShowDetails";
 import SeatArrangement from "./seat-arrangement";
 import { Show as ShowType } from "@/_services/ShowService";
-import { SeatStatus } from "@/_services/SeatService";
+import { Seat, SeatStatus } from "@/_services/SeatService";
 import { Movie } from "@/_services/MovieService";
-
-type Seat = [number, number];
 
 interface ShowProps {
   show: ShowType;
@@ -23,18 +21,23 @@ const Show = ({ show, seatArrangement, movie }: ShowProps) => {
   const isSeatSelected = (rowIndex: number, columnIndex: number) => {
     if (
       selectedSeats.find(
-        (seat) => seat[0] === rowIndex && seat[1] === columnIndex
+        (seat) => seat.row === rowIndex && seat.column === columnIndex
       )
     )
       return true;
     else return false;
   };
 
-  const handleSeatSelect = (rowIndex: number, columnIndex: number) => {
+  const handleSeatSelect = (
+    rowIndex: number,
+    columnIndex: number,
+    rowName: string,
+    seatNumber: number
+  ) => {
     if (isSeatSelected(rowIndex, columnIndex)) {
       setSelectedSeats(
         selectedSeats.filter(
-          (seat) => !(seat[0] === rowIndex && seat[1] === columnIndex)
+          (seat) => !(seat.row === rowIndex && seat.column === columnIndex)
         )
       );
     } else {
@@ -45,7 +48,14 @@ const Show = ({ show, seatArrangement, movie }: ShowProps) => {
         }, 2000);
         return;
       }
-      setSelectedSeats([...selectedSeats, [rowIndex, columnIndex]]);
+      setSelectedSeats([
+        ...selectedSeats,
+        {
+          row: rowIndex,
+          column: columnIndex,
+          label: `${rowName.toUpperCase()}${seatNumber}`,
+        },
+      ]);
     }
   };
 
@@ -55,6 +65,7 @@ const Show = ({ show, seatArrangement, movie }: ShowProps) => {
         show={show}
         areSeatsSelected={selectedSeats.length > 0}
         movie={movie}
+        selectedSeats={selectedSeats}
       />
       <Box className="flex-grow">
         <SeatArrangement

@@ -5,7 +5,12 @@ import Seat from "./Seat";
 
 interface ArrangementGridProps {
   seatArrangement: SeatStatus[][];
-  onSelectSeat: (row: number, column: number) => void;
+  onSelectSeat: (
+    row: number,
+    column: number,
+    rowName: string,
+    columnNumber: number
+  ) => void;
   isSeatSelected: (row: number, column: number) => boolean;
 }
 
@@ -46,8 +51,13 @@ const ArrangementGrid = ({
                   seatNumber={seatNumber}
                   status={seat}
                   selected={isSeatSelected(rowIndex, columnIndex - 1)}
-                  onSelectSeat={() => {
-                    onSelectSeat(rowIndex, columnIndex - 1);
+                  onSelectSeat={(seatNumber: number) => {
+                    onSelectSeat(
+                      rowIndex,
+                      columnIndex - 1,
+                      rowName,
+                      seatNumber
+                    );
                   }}
                 />
               );

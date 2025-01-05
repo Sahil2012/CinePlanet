@@ -2,13 +2,17 @@ import { SeatStatus } from "@/_services/SeatService";
 import { Box, Callout, Flex, Text } from "@radix-ui/themes";
 import { MdError } from "react-icons/md";
 import ArrangementGrid from "./ArrangementGrid";
-import Seat from "./Seat";
 import Legend from "./Legend";
 
 interface SeatArrangementProps {
   seatArrangement: SeatStatus[][];
   error: boolean;
-  onSelectSeat: (row: number, column: number) => void;
+  onSelectSeat: (
+    row: number,
+    column: number,
+    rowName: string,
+    columnNumber: number
+  ) => void;
   isSeatSelected: (row: number, column: number) => boolean;
 }
 

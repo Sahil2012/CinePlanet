@@ -123,6 +123,12 @@ const data: SeatStatus[][] = [
 
 export type SeatStatus = "AVAILABLE" | "BLOCKED" | "NA";
 
+export interface Seat {
+  row: number;
+  column: number;
+  label: string;
+};
+
 class SeatService {
   getSeatArrangement(showId: string, theatreId: string) {
     return new Promise<SeatStatus[][]>((res) => {

@@ -5,7 +5,7 @@ interface SeatProps {
   status: SeatStatus;
   seatNumber: number;
   selected: boolean;
-  onSelectSeat: () => void;
+  onSelectSeat: (seatNumber: number) => void;
 }
 
 const Seat = ({ status, seatNumber, selected, onSelectSeat }: SeatProps) => {
@@ -38,7 +38,9 @@ const Seat = ({ status, seatNumber, selected, onSelectSeat }: SeatProps) => {
       justify="center"
       align="center"
       className={`${boxClasses} cursor-pointer ${seatClasses}`}
-      onClick={onSelectSeat}
+      onClick={() => {
+        onSelectSeat(seatNumber);
+      }}
     >
       <Text size="2">{seatNumber}</Text>
     </Flex>
