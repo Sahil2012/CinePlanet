@@ -122,6 +122,7 @@ const data: SeatStatus[][] = [
 ];
 
 export type SeatStatus = "AVAILABLE" | "BLOCKED" | "NA";
+export type BlockStatus = "SUCCESS" | "ALREADY_BOOKED";
 
 export interface Seat {
   row: number;
@@ -134,6 +135,14 @@ class SeatService {
     return new Promise<SeatStatus[][]>((res) => {
       setTimeout(() => {
         res(data);
+      }, 10);
+    });
+  }
+
+  blockSeats(showId: string, theatreId: string, seats: Seat[]) {
+    return new Promise<BlockStatus>((res) => {
+      setTimeout(() => {
+        res("SUCCESS");
       }, 10);
     });
   }
