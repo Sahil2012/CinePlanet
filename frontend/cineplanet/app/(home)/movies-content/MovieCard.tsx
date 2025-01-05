@@ -1,9 +1,9 @@
 "use client";
 
+import Image from "@/_components/ui/Image";
 import { joinWithSlash } from "@/_lib/utils";
 import { Movie } from "@/_services/MovieService";
 import { Box, Card, Flex, Heading, Inset, Text } from "@radix-ui/themes";
-import Image from "next/image";
 import { useRouter } from "next/navigation";
 
 interface MovieCardProps {
@@ -21,18 +21,6 @@ const MovieCard = ({ movie, className }: MovieCardProps) => {
   const languages = joinWithSlash(movie.languages, 2);
   const genres = joinWithSlash(movie.genres, 3);
 
-  const image = movie.img ? (
-    <Image
-      src={movie.img}
-      alt={movie.name}
-      className="object-cover h-full"
-      fill
-      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-    />
-  ) : (
-    <Box>Y</Box>
-  );
-
   return (
     <Box
       className={"relative w-52 hover:cursor-pointer " + className}
@@ -42,7 +30,7 @@ const MovieCard = ({ movie, className }: MovieCardProps) => {
     >
       <Card className="h-80 border-2 border-[var(--accent-8)] mb-3">
         <Inset clip="padding-box" side="all" p="current">
-          {image}
+          <Image img={movie.img} alt={movie.name} />
         </Inset>
       </Card>
       <Flex direction="column" gap="1" className="px-2">
