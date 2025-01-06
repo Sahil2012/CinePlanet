@@ -2,11 +2,11 @@
 
 import React, { useState } from "react";
 import { Box, Flex } from "@radix-ui/themes";
-import ShowDetails from "./ShowDetails";
 import SeatArrangement from "./seat-arrangement";
 import { Show as ShowType } from "@/_services/ShowService";
 import { Seat, SeatStatus } from "@/_services/SeatService";
 import { Movie } from "@/_services/MovieService";
+import ShowDetails from "./show-details";
 
 interface ShowProps {
   show: ShowType;
@@ -16,7 +16,7 @@ interface ShowProps {
 
 const Show = ({ show, seatArrangement, movie }: ShowProps) => {
   const [selectedSeats, setSelectedSeats] = useState<Seat[]>([]);
-  const [error, setError] = useState(false);
+  const [seatLimitReached, setSeatLimitReached] = useState(false);
 
   const isSeatSelected = (rowIndex: number, columnIndex: number) => {
     if (
@@ -42,9 +42,9 @@ const Show = ({ show, seatArrangement, movie }: ShowProps) => {
       );
     } else {
       if (selectedSeats.length === 6) {
-        setError(true);
+        setSeatLimitReached(true);
         setTimeout(() => {
-          setError(false);
+          setSeatLimitReached(false);
         }, 2000);
         return;
       }
@@ -70,7 +70,7 @@ const Show = ({ show, seatArrangement, movie }: ShowProps) => {
       <Box className="flex-grow">
         <SeatArrangement
           seatArrangement={seatArrangement}
-          error={error}
+          seatLimitReached={seatLimitReached}
           isSeatSelected={isSeatSelected}
           onSelectSeat={handleSeatSelect}
         />

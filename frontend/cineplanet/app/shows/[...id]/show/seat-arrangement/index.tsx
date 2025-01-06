@@ -6,7 +6,7 @@ import Legend from "./Legend";
 
 interface SeatArrangementProps {
   seatArrangement: SeatStatus[][];
-  error: boolean;
+  seatLimitReached: boolean;
   onSelectSeat: (
     row: number,
     column: number,
@@ -18,7 +18,7 @@ interface SeatArrangementProps {
 
 const SeatArrangement = ({
   seatArrangement,
-  error,
+  seatLimitReached,
   onSelectSeat,
   isSeatSelected,
 }: SeatArrangementProps) => {
@@ -50,7 +50,7 @@ const SeatArrangement = ({
         </Text>
         <Box className="h-1.5 rounded-sm w-80 bg-[var(--accent-8)] border border-[var(--accent-8)]"></Box>
       </Flex>
-      {error && (
+      {seatLimitReached && (
         <Box className="absolute top-5 w-full flex justify-center">
           <Callout.Root color="gray" variant="soft" highContrast>
             <Callout.Icon>
