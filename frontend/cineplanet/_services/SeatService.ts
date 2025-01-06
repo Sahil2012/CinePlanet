@@ -140,10 +140,15 @@ class SeatService {
   }
 
   blockSeats(showId: string, theatreId: string, seats: Seat[]) {
-    return new Promise<BlockStatus>((res) => {
+    return new Promise<BlockStatus>((res, rej) => {
       setTimeout(() => {
-        res("SUCCESS");
-      }, 10);
+        const val = Math.random();
+        if (val < 0.2) {
+          res("ALREADY_BOOKED");
+        } else {
+          res("SUCCESS");
+        }
+      }, 1000);
     });
   }
 }

@@ -1,9 +1,9 @@
-import { Movie } from "@/_services/MovieService";
-import { Show } from "@/_services/ShowService";
-import { Box, Button, Flex, Heading, Text } from "@radix-ui/themes";
-import BookTicketsDialog from "./book-tickets-dialog";
 import { getDate, getTime } from "@/_lib/utils";
+import { Movie } from "@/_services/MovieService";
 import { Seat } from "@/_services/SeatService";
+import { Show } from "@/_services/ShowService";
+import { Box, Flex, Heading, Text } from "@radix-ui/themes";
+import BookNow from "./BookNow";
 
 interface ShowDetailsProps {
   show: Show;
@@ -45,18 +45,12 @@ const ShowDetails = ({
             </Text>
           </Flex>
         </Flex>
-        <Box>
-          <BookTicketsDialog
-            show={show}
-            movie={movie}
-            selectedSeats={selectedSeats}
-            trigger={
-              <Button size="3" disabled={!areSeatsSelected}>
-                Book Tickets
-              </Button>
-            }
-          />
-        </Box>
+        <BookNow
+          show={show}
+          movie={movie}
+          areSeatsSelected={areSeatsSelected}
+          selectedSeats={selectedSeats}
+        />
       </Flex>
     </Box>
   );

@@ -5,7 +5,7 @@ import React from "react";
 
 const ProfileCard = () => {
   const { data: session } = useSession();
-  console.log(session);
+
   return (
     <Card className="w-full">
       <Flex gap="3" align="center">
