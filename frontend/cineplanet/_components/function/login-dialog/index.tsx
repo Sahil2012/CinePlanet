@@ -21,8 +21,15 @@ interface LoginDialogProps {
 
 const LoginDialog = ({ trigger }: LoginDialogProps) => {
   const [action, setAction] = useState<Action>("login");
+  const [loading, setLoading] = useState(false);
 
   const actionForm = action === "login" ? <LoginForm /> : <SignupForm />;
+
+  const handleGoogleSignin = async () => {
+    setLoading(true);
+    await signIn("google");
+    setLoading(false);
+  };
 
   return (
     <Dialog.Root>
@@ -57,7 +64,8 @@ const LoginDialog = ({ trigger }: LoginDialogProps) => {
         </Separator>
         <Box>
           <Button
-            onClick={() => signIn("google")}
+            onClick={handleGoogleSignin}
+            loading={loading}
             className="!w-full"
             variant="surface"
             size="3"

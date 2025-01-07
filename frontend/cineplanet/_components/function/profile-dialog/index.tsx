@@ -1,9 +1,9 @@
 import { Box, Button, Dialog, Flex, Separator } from "@radix-ui/themes";
 import { signOut, useSession } from "next-auth/react";
-import React, { ReactNode } from "react";
+import React, { ReactNode, useState } from "react";
 import ProfileCard from "./ProfileCard";
 import Wallet from "./Wallet";
-import Bookings from "./Bookings";
+import Bookings from "./bookings";
 
 interface ProfileDialogProps {
   trigger: ReactNode;
@@ -11,10 +11,17 @@ interface ProfileDialogProps {
 
 const ProfileDialog = ({ trigger }: ProfileDialogProps) => {
   const { data } = useSession();
+  const [loading, setLoading] = useState(false);
 
   if (!data?.user) {
     return null;
   }
+
+  const handleSignout = async () => {
+    setLoading(true);
+    await signOut();
+    setLoading(false);
+  };
 
   return (
     <Dialog.Root>
@@ -27,17 +34,18 @@ const ProfileDialog = ({ trigger }: ProfileDialogProps) => {
 
         <Flex className="flex-col gap-3 pt-3 pb-5">
           <ProfileCard />
-          <Box className="px-2 mt-2">
-            <Wallet />
+          <Box className="px-2 mt-2 mb-1">
+            <Wallet user={data.user} />
           </Box>
-          <Flex justify="center" mb="2" >
+          <Flex justify="center" mb="2">
             <Separator size="3" />
           </Flex>
-          <Bookings />
+          <Bookings user={data.user} />
         </Flex>
         <Box>
           <Button
-            onClick={() => signOut()}
+            onClick={handleSignout}
+            loading={loading}
             color="red"
             className="!w-full"
             variant="surface"
