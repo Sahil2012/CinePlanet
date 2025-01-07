@@ -1,31 +1,11 @@
-import PaymentService, { Bill as IBill } from "@/_services/PaymentService";
-import { Seat } from "@/_services/SeatService";
-import { Show } from "@/_services/ShowService";
+import { Bill as IBill } from "@/_services/PaymentService";
 import { Flex, Table, Text } from "@radix-ui/themes";
-import React, { useEffect, useState } from "react";
 
 interface BillProps {
-  show: Show;
-  selectedSeats: Seat[];
+  bill: IBill;
 }
 
-const Bill = ({ show, selectedSeats }: BillProps) => {
-  const [bill, setBill] = useState<IBill>();
-
-  useEffect(() => {
-    (async () => {
-      const generatedBill = await PaymentService.generateBill(
-        show.id,
-        selectedSeats
-      );
-      setBill(generatedBill);
-    })();
-  }, []);
-
-  if (!bill) {
-    return null;
-  }
-
+const Bill = ({ bill }: BillProps) => {
   return (
     <Table.Root variant="surface">
       <Table.Body>

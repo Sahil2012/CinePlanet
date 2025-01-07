@@ -1,4 +1,5 @@
 import { Movie } from "@/_services/MovieService";
+import { Bill as IBill } from "@/_services/PaymentService";
 import { BlockStatus, Seat } from "@/_services/SeatService";
 import { Show } from "@/_services/ShowService";
 import {
@@ -17,6 +18,7 @@ import TicketsDetails from "./TicketsDetails";
 import Wallet from "./Wallet";
 
 interface BookTicketsDialogProps {
+  bill: IBill | undefined;
   open: boolean;
   onOpenChange: () => void;
   seatsStatus: BlockStatus | undefined;
@@ -28,6 +30,7 @@ interface BookTicketsDialogProps {
 }
 
 const BookTicketsDialog = ({
+  bill,
   show,
   movie,
   selectedSeats,
@@ -84,7 +87,7 @@ const BookTicketsDialog = ({
         </Flex>
       </>
     );
-  } else if (seatsStatus === "SUCCESS") {
+  } else if (seatsStatus === "SUCCESS" && bill) {
     content = (
       <>
         <Dialog.Title align="center" size="7">
@@ -106,7 +109,7 @@ const BookTicketsDialog = ({
             <Separator size="3" />
           </Flex>
           <Box className="py-5">
-            <Bill show={show} selectedSeats={selectedSeats} />
+            <Bill bill={bill} />
           </Box>
           <Box>
             <Button onClick={() => {}} className="!w-full" size="3">

@@ -17,7 +17,7 @@ class PaymentService {
           convenienceFee: 20,
           total: 100 * seats.length + 20,
         });
-      }, 10);
+      }, 1000);
     });
   }
 }

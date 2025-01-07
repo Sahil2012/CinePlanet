@@ -5,6 +5,7 @@ import { Show } from "@/_services/ShowService";
 import { Movie } from "@/_services/MovieService";
 import SeatService, { BlockStatus, Seat } from "@/_services/SeatService";
 import { useQuery } from "@tanstack/react-query";
+import PaymentService, { Bill as IBill } from "@/_services/PaymentService";
 
 interface BookNowProps {
   show: Show;
@@ -19,12 +20,29 @@ const BookNow = ({
   areSeatsSelected,
   selectedSeats,
 }: BookNowProps) => {
-  const { data, isFetching, isPending, error, refetch } = useQuery<BlockStatus>({
+  const {
+    data: blockSeatsStatus,
+    isFetching,
+    isPending,
+    error: blockSeatsError,
+    refetch,
+  } = useQuery<BlockStatus>({
     queryKey: ["blockSeats", show.id, show.theatreId, ...selectedSeats],
     queryFn: () =>
       SeatService.blockSeats(show.id, show.theatreId, selectedSeats),
     refetchOnWindowFocus: false,
     enabled: false,
+  });
+
+  const {
+    data: bill,
+    isLoading,
+    error: billError,
+  } = useQuery<IBill>({
+    queryKey: ["bill", show.id, ...selectedSeats],
+    queryFn: () => PaymentService.generateBill(show.id, selectedSeats),
+    refetchOnWindowFocus: false,
+    enabled: blockSeatsStatus === "SUCCESS",
   });
 
   const [isDialogOpen, setIsDialogOpen] = useState(false);
@@ -40,9 +58,10 @@ const BookNow = ({
         Book Tickets
       </Button>
       <BookTicketsDialog
-        seatsStatus={data}
-        isLoading={isFetching || isPending}
-        error={error}
+        seatsStatus={blockSeatsStatus}
+        bill={bill}
+        isLoading={isFetching || isPending || isLoading}
+        error={blockSeatsError || billError}
         show={show}
         movie={movie}
         selectedSeats={selectedSeats}
