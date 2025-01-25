@@ -9,9 +9,19 @@ import jakarta.persistence.FetchType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
 
 @Entity
 @Table(name = "theater")
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@ToString
 public class Theater {
     
     @Id
@@ -23,49 +33,6 @@ public class Theater {
     private String address;
 
     @OneToMany(mappedBy = "theater", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    private List<Ticket> ticket;
+    private List<Screen> screens;
 
-    public Theater() {
-    }
-
-    public Theater(Integer id, String name, String address, List<Ticket> ticket) {
-        this.id = id;
-        this.name = name;
-        this.address = address;
-        this.ticket = ticket;
-    }
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getAddress() {
-        return address;
-    }
-
-    public void setAddress(String address) {
-        this.address = address;
-    }
-
-    public List<Ticket> getTicket() {
-        return ticket;
-    }
-
-    public void setTicket(List<Ticket> ticket) {
-        this.ticket = ticket;
-    }
-
-    
 }

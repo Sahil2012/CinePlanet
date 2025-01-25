@@ -1,8 +1,8 @@
 package com.example.bookingservice.domain;
 
+import java.time.LocalDateTime;
 
-
-import com.example.bookingservice.domain.enums.Role;
+import com.example.bookingservice.domain.enums.PaymentStatus;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -11,6 +11,8 @@ import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -19,28 +21,32 @@ import lombok.Setter;
 import lombok.ToString;
 
 @Entity
-@Table(name = "app_user")
+@Table(name = "Booking")
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
-public class User {
+public class Booking {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false, unique = true)
-    private String username;
+    @ManyToOne
+    @JoinColumn(name = "user_id", nullable = false)
+    private User user;
+
+    @ManyToOne
+    @JoinColumn(name = "show_seat_id", nullable = false)
+    private ShowSeat showSeat;
 
     @Column(nullable = false)
-    private String password; // Store a hashed password
-
-    @Column(nullable = false, unique = true)
-    private String email;
+    private LocalDateTime bookingTime = LocalDateTime.now();
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
-    private Role role = Role.USER; 
+    private PaymentStatus paymentStatus = PaymentStatus.PENDING; // Tracks payment
 
+    @Column(nullable = true)
+    private String paymentReference; // For storing payment gateway references
 }

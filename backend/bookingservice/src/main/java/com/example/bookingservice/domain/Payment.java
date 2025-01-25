@@ -1,10 +1,17 @@
 package com.example.bookingservice.domain;
+import java.time.LocalDateTime;
+
+import com.example.bookingservice.domain.enums.PaymentStatus;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -13,29 +20,32 @@ import lombok.Setter;
 import lombok.ToString;
 
 @Entity
-@Table(name = "Movie")
+@Table(name = "Payment")
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
-public class Movie {
+public class Payment {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false, unique = true)
-    private String title;
+    @ManyToOne
+    @JoinColumn(name = "booking_id", nullable = false)
+    private Booking booking;
 
     @Column(nullable = false)
-    private String genre;
+    private Double amount;
 
     @Column(nullable = false)
-    private Integer durationInMinutes;
+    private LocalDateTime paymentDate;
 
+    @Enumerated(EnumType.STRING)
     @Column(nullable = false)
-    private String language;
+    private PaymentStatus status;
 
     @Column(nullable = true)
-    private String posterUrl;
+    private String transactionId; // Payment Gateway Transaction ID
 }
+
