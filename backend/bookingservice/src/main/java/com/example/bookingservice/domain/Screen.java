@@ -3,6 +3,8 @@ package com.example.bookingservice.domain;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -44,6 +46,7 @@ public class Screen {
     private List<Seat> seats = new ArrayList<>();
 
     @ManyToOne
-    @JoinColumn(name = "theater_id", nullable = false)
+    @JoinColumn(name = "theater_id")
+    @JsonIgnore
     private Theater theater;
 }

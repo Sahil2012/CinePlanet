@@ -1,5 +1,7 @@
 package com.example.bookingservice.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -27,7 +29,8 @@ public class Seat {
     private Long id;
 
     @ManyToOne
-    @JoinColumn(name = "screen_id", nullable = false)
+    @JoinColumn(name = "screen_id")
+    @JsonIgnore
     private Screen screen;
 
     @Column(nullable = false)
