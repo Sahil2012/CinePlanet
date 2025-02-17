@@ -6,30 +6,40 @@ import Form from "../../ui/Form";
 const SignupForm = () => {
   return (
     <Form
-      schema={z
-        .object({
-          name: z.string().min(1, { message: "Name is required" }).max(20),
-          email: z.string().email({ message: "Invalid Email" }),
-          password: z
-            .string()
-            .regex(/^\S*$/, "Password must not contain any whitespace.") // No spaces, tabs, etc.
-            .min(8, { message: "Password must contain atleast 8 character(s)" })
-            .max(20, { message: "Password should not exceed 20 character(s)" }),
-          confirmPassword: z
-            .string()
-            .regex(/^\S*$/, "Password must not contain any whitespace.") // No spaces, tabs, etc.
-            .min(8, { message: "Password must contain atleast 8 character(s)" })
-            .max(20, { message: "Password should not exceed 20 character(s)" }),
-        })
-        .superRefine(({ confirmPassword, password }, ctx) => {
-          if (confirmPassword !== password) {
-            ctx.addIssue({
-              code: "custom",
-              message: "Passwords do not match",
-              path: ["confirmPassword"],
-            });
-          }
-        })}
+      schema={
+        z
+          .object({
+            name: z.string().min(1, { message: "Name is required" }).max(20),
+            email: z.string().email({ message: "Invalid Email" }),
+            password: z
+              .string()
+              .regex(/^\S*$/, "Password must not contain any whitespace.") // No spaces, tabs, etc.
+              .min(8, {
+                message: "Password must contain atleast 8 character(s)",
+              })
+              .max(20, {
+                message: "Password should not exceed 20 character(s)",
+              }),
+            confirmPassword: z
+              .string()
+              .regex(/^\S*$/, "Password must not contain any whitespace.") // No spaces, tabs, etc.
+              .min(8, {
+                message: "Password must contain atleast 8 character(s)",
+              })
+              .max(20, {
+                message: "Password should not exceed 20 character(s)",
+              }),
+          })
+          .superRefine(({ confirmPassword, password }, ctx) => {
+            if (confirmPassword !== password) {
+              ctx.addIssue({
+                code: "custom",
+                message: "Passwords do not match",
+                path: ["confirmPassword"],
+              });
+            }
+          }) as unknown as z.ZodObject<z.ZodRawShape>
+      }
       fields={[
         {
           name: "name",
@@ -51,7 +61,7 @@ const SignupForm = () => {
           name: "confirmPassword",
           placeholder: "Confirm Password",
           icon: <FaLock />,
-          type: "password"
+          type: "password",
         },
       ]}
       submitLabel="Signup"
