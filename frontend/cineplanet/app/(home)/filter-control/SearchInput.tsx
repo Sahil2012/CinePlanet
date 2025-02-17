@@ -1,6 +1,6 @@
 import { Button, IconButton, TextField } from "@radix-ui/themes";
 import { useRouter, useSearchParams } from "next/navigation";
-import { KeyboardEvent, useEffect, useRef, useState } from "react";
+import { KeyboardEvent, useState } from "react";
 import { BiSend } from "react-icons/bi";
 import { FaSearch } from "react-icons/fa";
 import { MdCancel } from "react-icons/md";

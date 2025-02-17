@@ -13,7 +13,7 @@ interface MovieCardProps {
 
 const MovieCard = ({ movie, className }: MovieCardProps) => {
   const router = useRouter();
-
+  console.log('rendering card');
   if (!movie.name) {
     return null;
   }
