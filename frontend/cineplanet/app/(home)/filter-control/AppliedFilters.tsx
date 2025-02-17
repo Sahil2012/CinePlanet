@@ -61,7 +61,7 @@ const AppliedFilters = ({
       {searchQuery && (
         <Text className="mx-1 mt-2" size="4" color="gray">
           <em>
-            Showing results for <Strong>"{searchQuery}"</Strong>
+            Showing results for <Strong>&quot;{searchQuery}&quot;</Strong>
           </em>
         </Text>
       )}
