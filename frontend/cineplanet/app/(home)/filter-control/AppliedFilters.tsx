@@ -1,9 +1,7 @@
 import BadgeGroup from "@/_components/ui/BadgeGroup";
 import { Button, Flex, Strong, Text } from "@radix-ui/themes";
-import { useRouter, useSearchParams } from "next/navigation";
+import { useSearchParams } from "next/navigation";
 import React from "react";
-import { IoCloseCircle } from "react-icons/io5";
-import { MdClose } from "react-icons/md";
 
 interface AppliedFiltersProps {
   selectedGenres: string[];
